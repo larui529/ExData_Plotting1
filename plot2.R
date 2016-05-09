@@ -1,4 +1,4 @@
-# 
+# Name: plot 2 
 # Author: Rui La <larui529@gmail.com>
 #
 # Note: this code can be run on Mac OSX
@@ -27,18 +27,21 @@ system ("(head -1 household_power_consumption.txt;
 
 ## read csv file
 Edata <- read.csv ("mydata.csv", sep = ';', header = T, na.strings = '?')
-
+## convert character of time to time 
+Edata$datetime <- strptime(paste(Edata$Date,Edata$Time), "%d/%m/%Y %H:%M")
 ## output as PNG file
-png ("plot1.png", width = 480, height = 480)
+png ("plot2.png", width = 480, height = 480)
 
-## plot the histgram
-hist (Edata$Global_active_power, 
-      xlab = 'Global Active Power (kilowatts)',
-      ylab = 'Frequency', 
-      col = "red",
-      main = "Global Active Power")
+
+## plot the plot 2
+plot(
+       Edata$datetime,
+       Edata$Global_active_power,
+       xlab ="",
+       ylab = "Global Active Power",
+       "l"
+   )
 
 ## close PNG device
 
 dev.off ()
-
